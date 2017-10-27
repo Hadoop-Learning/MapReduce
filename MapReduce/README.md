@@ -13,7 +13,7 @@ MR的执行流程我们这里通过统计每个单词出现次数的例子来说
 6. 最后的结果数据流存储在数据库中(注：结果的数据也是以分布式的方式存储的)；
 
 
-![image](https://github.com/ButBueatiful/dotvim/raw/master/screenshots/vim-screenshot.jpg)
+![image](https://github.com/idKevin/Hadoop-Learning/blob/master/.picture/Solution_1.gif)
 **以上的执行流程等价于Shell程序: cat data | python3 mapper.py | sort -k1 | python3 reducer.py，因为该框架Mapper与Reduce程序都是并行执行的，所以效率大大的提升，这种分布式架构主要是分而治之的思想。下面以具体的统计单词数目的例子进一步说明：**
 
 ### Solution 1
@@ -59,7 +59,7 @@ def main():
 ### Solution 2
 
 
-
+![image](https://github.com/idKevin/Hadoop-Learning/blob/master/.picture/Solution_2.gif)
 #### MR的指定分块的数目
 ```
     -D mapred.map.tasks=3
