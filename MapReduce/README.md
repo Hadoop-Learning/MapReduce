@@ -39,7 +39,7 @@ def main():
 
 #### Reduce程序(关键代码部分)
 
-```
+``` python3
 import sys
 from operator import itemgetter
 from itertools import groupby
@@ -69,7 +69,7 @@ def main():
 
 #### Map程序(关键代码部分)
 将数据流以键-值对的形式输出
-```
+``` python3
 import sys
 
 def main():
@@ -88,7 +88,7 @@ def main():
 ```
 
 #### Reduce程序(关键代码部分)
-```
+``` python3
 import sys
 from operator import itemgetter
 from itertools import groupby
