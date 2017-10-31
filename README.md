@@ -1,8 +1,11 @@
 # Hadoop生态概况
-Hadoop是一个由Apache基金会所开发的分布系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程度。充分利用集群的威力进行高速运算和存储。具有可靠、高效、可伸缩的特点。
+Hadoop是一个由Apache基金会所开发的分布系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程度。充分利用集群的威力进行高速运算和存储。具有可靠、高效、可伸缩的特点。Hadoop的核心是YARN、HDFS和MapReduce。
 
 ## HDFS
-Hadoop分布式文件系统，源自于Google的GFS论文，发表于2003年10月，HDFS是GFS克隆版。HDFS是Hadoop体系中数据存储管理的基础。它是一个高度容错的系统，能检测和应对硬件故障，用于在低成本的通用硬件上运行。HDFS简化了文件的一致性模型，通过流式数据访问，提供高吞吐量应用程序数据访问功能，适合带有大型数据集的应用程序。它提供一次写入多次读取的机制，数据以块的形式，同时分布在集群不同物理机器上。
+Hadoop是分布式文件系统，源自于Google的GFS论文，发表于2003年10月，HDFS是GFS克隆版。HDFS是Hadoop体系中数据存储管理的基础。它是一个高度容错的系统，能检测和应对硬件故障，用于在低成本的通用硬件上运行。HDFS简化了文件的一致性模型，通过流式数据访问，提供高吞吐量应用程序数据访问功能，适合带有大型数据集的应用程序。它提供一次写入多次读取的机制，数据以块的形式，同时分布在集群不同物理机器上。
+
+## Tachyon
+Tachyon是分布式内存文件系统（Tachyon诞生于UC Berkeley的AMPLab），Tachyon是以内存为中心的分布式文件系统，拥有高性能和容错能力，能够为集群框架（如Spark、MapReduce）提供可靠的内存级速度的文件共享服务。
 
 ## Yarn
 Yarn是分布式资源管理器，Yarn是下一代MapReduce，即MRv2，是在第一代MapReduce基础上演变而来的，主要是为了解决原始Hadoop扩展性较差，不支持多计算框架而提出的。Yarn是下一代Hadoop计算平台，yarn是一个通用的运行时框架，用户可以编写自己的计算框架，在该运行环境中运行。用于自己编写的框架作为客户端的一个lib，在运用提交作业时打包即可。该框架为提供了以下几个组件：
@@ -11,23 +14,35 @@ Yarn是分布式资源管理器，Yarn是下一代MapReduce，即MRv2，是在�
 - 容错性：各个组件均有考虑容错性
 - 扩展性：可扩展到上万个节点
 
-## Tachyon
-Tachyon是分布式内存文件系统（Tachyon诞生于UC Berkeley的AMPLab），Tachyon是内存为中心的分布式文件系统，拥有高性能和容错能力，能够为集群框架（如Spark、MapReduce）提供可靠的内存级速度的文件共享服务。
-
 ## MapReduce
 MapReduce是分布式计算框架，源自于Google的MapReduce论文，发表于2004年12月，Hadoop MapReduce是google MapReduce克隆版。MapReduce是一种分布式计算模型，用以进行大数据量的计算。它屏蔽了分布式计算框架细节，将计算抽象成map和reduce两部分，其中Map对数据集上的独立元素进行指定的操作，生成键-值对形式中间结果。Reduce则对中间结果中相同“键”的所有“值”进行规约，以得到最终结果。MapReduce非常适合在大量计算机组成的分布式并行环境里进行数据处理。
-
-## HBase
-HBase是分布式列存数据库，源自Google的Bigtable论文，发表于2006年11月，HBase是Google Bigtable克隆版，HBase是一个建立在HDFS之上，面向列的针对结构化数据的可伸缩、高可靠、高性能、分布式和面向列的动态模式数据库。HBase采用了Big Table的数据模型：增强的稀疏排序映射表(Key/Value)，其中，键由行关键字、列关键字和时间戳构成，HBase提供了对大规模数据的随机、实时读写访问，同时，HBase中保存的数据可以使用MapReduce来处理，它将数据存储和并行计算完美地结合在一起。
-
-## Zookeeper
-Zookeeper是分布式协作服务，源自Google的Chubby论文，发表于2006年11月，Zookeeper是Chubby克隆版。解决分布式环境下的数据管理问题：统一命名，状态同步，集群管理，配置同步等。Hadoop的许多组件依赖于Zookeeper，它运行在计算机集群上面，用于管理Hadoop操作。
 
 ## Hive
 Hive是数据仓库，由facebook开源，最初用于解决海量结构化的日志数据统计问题。Hive定义了一种类似SQL的查询语言(HQL)，将SQL转化为MapReduce任务在Hadoop上执行。通常用于离线分析。HQL用于运行存储在Hadoop上的查询语句，Hive让不熟翻MapReduce开发人员也能编写数据查询语句，然后这些语句被翻译为Hadoop上面的MapReduce任务。
 
 ## Pig
-Pig是ad-hoc脚本，由yahoo！开源，设计动机是提供一种基于MapReduce的ad-hoc(计算在query时发生)数据分析工具，Pig定义了一种数据流语言（Pig Latin），它是MapReduce编程的复杂性的抽象，Pig平台包括运行环境用于分析Hadoop数据集的脚本语言(Pig Latin)。
+Pig是ad-hoc脚本，由yahoo！开源，设计动机是提供一种基于MapReduce的ad-hoc(计算在query时发生)数据分析工具，Pig定义了一种数据流语言（Pig Latin），它是MapReduce编程的复杂性的抽象，Pig平台包括运行环境和用于分析Hadoop数据集的脚本语言(Pig Latin)。其编译器将Pig Latin翻译成MapReduce程序序列将脚本转换为MapReduce任务在Hadoop上执行。通常用于进行离线分析。
+
+## Giraph
+Giraph是图计算模型。Apache Giraph是一个可伸缩的分布式迭代图像处理系统，基于Hadoop平台，灵感来自BSP(bulk synchronous parallel)和Google的Pregel。最早出自雅虎，雅虎在开发Giraph时采用了Google工程师2010年发表的论文《Pregel：大规模图表处理系统》中的原理，后来，雅虎将Giraph捐赠给Apache软件基金会。目前所有人都可以下载Giraph，它已经成为Apache软件基金会的开源项目，并得到Facebook的支持，获得多方面的改进。
+
+## GraphX
+GraphX是图计算模型。Spark GraphX最先是伯克利AmpLab的一个分布式图计算框架项目，目前整合在Spark运行框架中，为其提供BSP大规模并行图计算能力。
+
+## Mahout
+Mahout是数据挖掘算法，Mahout起源于2008年，最初是Apache Lucent的子项目，它在极短的时间内取得了长足的发展，现在是Apache的顶级项目。Mahout的主要目标是创建一些可扩展的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。Mahout现在已经包含了聚类、分类、推荐引警（协同过滤）和频繁集挖掘等广泛使用的数据挖掘方法。除了算法，Mahout还包含数据的输入/输出工具、与其他存储系统（如数据库、MongoDB或Cassandra）集成等数据挖掘支持架构。
+
+## MLib
+Mlib是机器学习。Spark Mlib是一个机器学习库，它提供了各种各样的算法，这些算法用来在集群上针对分类、回归、聚类、协同过滤等。
+
+## Streaming
+Streaming是流计算模型，Spark Streaming支持对流数据的实时处理，以微批的方式对实时数据进行计算。
+
+## HBase 
+HBase是分布式列存数据库，源自Google的Bigtable论文，发表于2006年11月，HBase是Google Bigtable克隆版，HBase是一个建立在HDFS之上，面向列的针对结构化数据的可伸缩、高可靠、高性能、分布式和面向列的动态模式数据库。HBase采用了Big Table的数据模型：增强的稀疏排序映射表(Key/Value)，其中，键由行关键字、列关键字和时间戳构成，HBase提供了对大规模数据的随机、实时读写访问，同时，HBase中保存的数据可以使用MapReduce来处理，它将数据存储和并行计算完美地结合在一起。
+
+## Zookeeper
+Zookeeper是分布式协作服务，源自Google的Chubby论文，发表于2006年11月，Zookeeper是Chubby克隆版。解决分布式环境下的数据管理问题：统一命名，状态同步，集群管理，配置同步等。Hadoop的许多组件依赖于Zookeeper，它运行在计算机集群上面，用于管理Hadoop操作。
 
 ## Sqoop
 Sqoop是SQL-to-Hadoop的缩写，主要用于传统数据库和Hadoop之间传输数据。数据的导入和导出本质上是MapReduce程序，充分利用了MR的并行化和容错性。Sqoop利用数据库技术描述数据架构，用于在关系数据库、数据仓库和Hadoop之间转移数据。
